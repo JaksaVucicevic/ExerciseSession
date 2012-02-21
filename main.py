@@ -16,7 +16,7 @@ def FixFile(fname,lines,i) :
         F.write(line)    
     F.close()  
 
-Flist = FileList('cleandata')
+Flist = FileList(os.argv[1])
 for Fname in Flist :
     F = open(Fname)
     lines = F.readlines()
