@@ -1,4 +1,4 @@
-import os, glob, string
+import sys, glob, string
 
 def FileList(path):
     return glob.glob(path+"/*.txt")
@@ -16,7 +16,7 @@ def FixFile(fname,lines,i) :
         F.write(line)    
     F.close()  
 
-Flist = FileList(os.argv[1])
+Flist = FileList(sys.argv[1])
 for Fname in Flist :
     F = open(Fname)
     lines = F.readlines()
