@@ -4,30 +4,29 @@ def FileList(path):
     return glob.glob(path+"/*.txt")
 
 def CheckForN(line):
-    if string.find(line,": N") == -1 :
+    if string.find(line,"Sex: N") == -1 :
       return False
     else :
       return True  
 
-def FixFile(fname) :
+def FixFile(fname,i) :
     F = open(fname)   
     lines = F.readlines()
     F.close()
+    lines[i] = "Sex: M\n"; 
     F = open(fname,'w')
     for line in lines :
-        if not CheckForN(line) :
-            F.write(line)
-        else :
-            F.write("Sex: M\n")
+        F.write(line)    
     F.close()  
 
 Flist = FileList('cleandata')
 for Fname in Flist :
     F = open(Fname)
-    for line in F :
-        if CheckForN(line) :
-             print Fname, line
-             FixFile(Fname)
+    lines = F.readlines()
+    for i in range(len(lines)):
+        if CheckForN(lines[i]) :
+             print Fname, lines[i]
+             FixFile(Fname,i)
              break
     F.close()
  
