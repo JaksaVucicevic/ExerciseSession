@@ -9,10 +9,7 @@ def CheckForN(line):
     else :
       return True  
 
-def FixFile(fname,i) :
-    F = open(fname)   
-    lines = F.readlines()
-    F.close()
+def FixFile(fname,lines,i) :
     lines[i] = "Sex: M\n"; 
     F = open(fname,'w')
     for line in lines :
@@ -26,7 +23,7 @@ for Fname in Flist :
     for i in range(len(lines)):
         if CheckForN(lines[i]) :
              print Fname, lines[i]
-             FixFile(Fname,i)
+             FixFile(Fname,lines,i)
              break
     F.close()
  
