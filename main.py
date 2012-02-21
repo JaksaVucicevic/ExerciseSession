@@ -28,5 +28,7 @@ for Fname in Flist :
         if CheckForN(line) :
              print Fname, line
              FixFile(Fname)
+             break
+    F.close()
  
 
