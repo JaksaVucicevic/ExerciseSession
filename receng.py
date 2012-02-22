@@ -63,8 +63,15 @@ class Engine(object):
        else :
          return 0
    
-#   def tanimoto(self,r1,r2):
-     
+   def tanimoto(self,r1,r2):
+       v1 = numpy.array(self.matrix[:,r1])
+       v2 = numpy.array(self.matrix[:,r2])
+       a = 0.
+       o = 0.
+       for i in range(self.NP) :
+           if v1[i]>=0 and v2[i]>0 : a += 1.
+           if v1[i]>=0 or  v2[i]>0 : o += 1.
+       return a/o     
    
   
 engine = Engine()
@@ -77,3 +84,4 @@ print engine.papers
 print engine.matrix
 print engine.similarity(2,4)
 print engine.pearson(2,3)
+print engine.tanimoto(2,3)
