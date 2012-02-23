@@ -43,10 +43,7 @@ class Engine(object):
    def similarity(self,r1,r2):      
        v1 = numpy.array(self.matrix[:,r1])
        v2 = numpy.array(self.matrix[:,r2])
-#       print v1
-#       print v2
        v = diff(v1,v2)   
-#       print v  
        return numpy.linalg.norm( v )
 
    def pearson(self,r1,r2):      
@@ -69,10 +66,13 @@ class Engine(object):
        a = 0.
        o = 0.
        for i in range(self.NP) :
-           if v1[i]>=0 and v2[i]>0 : a += 1.
-           if v1[i]>=0 or  v2[i]>0 : o += 1.
-       return a/o     
-   
+           if v1[i]>=0 and v2[i]>=0 : a += 1.
+           if v1[i]>=0 or  v2[i]>=0 : o += 1.
+       if o!=0 :
+         return 0
+       else :
+         return a/o
+       
   
 engine = Engine()
 engine.set_data(data)
@@ -85,3 +85,12 @@ print engine.matrix
 print engine.similarity(2,4)
 print engine.pearson(2,3)
 print engine.tanimoto(2,3)
+
+for i in range(7):
+  for j in range(7):
+    if i>=j : continue
+    print engine.referees[i],' and ',engine.referees[j]
+    print '---2-norm: ', engine.similarity(i,j)
+    print '---pearson: ',engine.pearson(i,j)
+    print '---tanimoto: ',engine.tanimoto(i,j)
+    
